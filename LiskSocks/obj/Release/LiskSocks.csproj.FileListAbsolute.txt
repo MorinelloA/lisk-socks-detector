@@ -1,0 +1,7 @@
+C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin\Release\LiskSocks.exe.config
+C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin\Release\LiskSocks.exe
+C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin\Release\LiskSocks.pdb
+C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin\Release\Newtonsoft.Json.dll
+C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin\Release\Newtonsoft.Json.xml
+C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\obj\Release\LiskSocks.exe
+C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\obj\Release\LiskSocks.pdb
