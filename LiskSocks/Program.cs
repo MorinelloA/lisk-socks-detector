@@ -31,6 +31,29 @@ namespace LiskSocks
                     moveOn = false;
                 }
             } while (!moveOn);
+
+            int typeTrans = 0;
+            do
+            {
+                moveOn = true;
+                Console.WriteLine("Enter 1 for voting trans, 2 for funds trans, 3 for both");
+                try
+                {
+                    typeTrans = Convert.ToInt32(Console.ReadLine());
+                    if(typeTrans < 1 || typeTrans > 3)
+                    {
+                        Console.WriteLine("You must enter 1, 2, or 3");
+                        moveOn = false;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("You must enter 1, 2, or 3");
+                    moveOn = false;
+                }
+
+            } while (!moveOn);
+
             int offset = 0;
 
             //string publicNode = "https://wallet.lisknode.io/";
@@ -46,6 +69,7 @@ namespace LiskSocks
             }
             List<string> transactions = new List<string>();
             List<Transaction> votingTrans = new List<Transaction>();
+            List<Transaction> regTrans = new List<Transaction>();
 
             Console.WriteLine("Addresses gathered");
             Console.WriteLine("Gathering transactions for each address");
@@ -83,6 +107,7 @@ namespace LiskSocks
             Console.WriteLine("Done with all addresses");
             File.WriteAllText("SameVotes.txt", string.Empty);
             File.WriteAllText("DifferentVotes.txt", string.Empty);
+            File.WriteAllText("SameFunds.txt", string.Empty);
 
             foreach (string str in transactions)
             {
@@ -94,6 +119,10 @@ namespace LiskSocks
                     {
                         votingTrans.Add(tran);
                     }
+                    else
+                    {
+                        regTrans.Add(tran);
+                    }
                 }
                 // Open the file to read from.
                 //string readText = File.ReadAllText(path);
@@ -102,43 +131,76 @@ namespace LiskSocks
             Console.WriteLine("Transactions seperated by type");
             Console.WriteLine("Looking for possible socks");
 
-            for(int i = 0; i < votingTrans.Count; i++)
+            if (typeTrans == 1 || typeTrans == 3)
             {
-                for (int j = 0; j < votingTrans.Count; j++)
+                Console.WriteLine("Going through voting transactions");
+
+                for (int i = 0; i < votingTrans.Count; i++)
                 {
-                    if(i < j)
+                    for (int j = 0; j < votingTrans.Count; j++)
                     {
-                        if(votingTrans[i].timestamp - votingTrans[j].timestamp <= range && votingTrans[i].timestamp - votingTrans[j].timestamp > 0)
+                        if (i < j)
                         {
-                            if (votingTrans[i].senderId != votingTrans[j].senderId)
+                            if (votingTrans[i].timestamp - votingTrans[j].timestamp <= range && votingTrans[i].timestamp - votingTrans[j].timestamp > 0)
                             {
-                                if (addresses[votingTrans[i].senderId] != addresses[votingTrans[j].senderId])
+                                if (votingTrans[i].senderId != votingTrans[j].senderId)
                                 {
-                                    //api / transactions / get ? id = 2715735863990084187
-                                    string query1 = "api/transactions/get?id=" + votingTrans[i].id;
-                                    string query2 = "api/transactions/get?id=" + votingTrans[j].id;
-
-                                    //Without sorting, duplicate transactions are gathered
-                                    //string query = "api/transactions?&senderId=" + address.Key + "&limit=1000&offset=" + offset;
-
-                                    using (WebClient wc = new WebClient())
+                                    if (addresses[votingTrans[i].senderId] != addresses[votingTrans[j].senderId])
                                     {
-                                        string temp1 = wc.DownloadString(publicNode + query1);
-                                        string temp2 = wc.DownloadString(publicNode + query2);
+                                        //api / transactions / get ? id = 2715735863990084187
+                                        string query1 = "api/transactions/get?id=" + votingTrans[i].id;
+                                        string query2 = "api/transactions/get?id=" + votingTrans[j].id;
 
-                                        VoteTransaction tempTransaction1 = JsonConvert.DeserializeObject<VoteTransaction>(temp1);
-                                        VoteTransaction tempTransaction2 = JsonConvert.DeserializeObject<VoteTransaction>(temp2);
+                                        //Without sorting, duplicate transactions are gathered
+                                        //string query = "api/transactions?&senderId=" + address.Key + "&limit=1000&offset=" + offset;
 
-                                        //ints1.All(ints2.Contains) && ints1.Count == ints2.Count;
-                                        if (tempTransaction1.transaction.votes.added.All(tempTransaction2.transaction.votes.added.Contains) && tempTransaction1.transaction.votes.added.Count == tempTransaction2.transaction.votes.added.Count && tempTransaction1.transaction.votes.added.Count > 0)
+                                        using (WebClient wc = new WebClient())
                                         {
-                                            Console.WriteLine("Same vote match found - " + addresses[votingTrans[i].senderId] + " & " + addresses[votingTrans[j].senderId]);
-                                            File.AppendAllText("SameVotes.txt", addresses[votingTrans[i].senderId] + ": " + votingTrans[i].id + " & " + addresses[votingTrans[j].senderId] + ": " + votingTrans[j].id + Environment.NewLine);
+                                            string temp1 = wc.DownloadString(publicNode + query1);
+                                            string temp2 = wc.DownloadString(publicNode + query2);
+
+                                            VoteTransaction tempTransaction1 = JsonConvert.DeserializeObject<VoteTransaction>(temp1);
+                                            VoteTransaction tempTransaction2 = JsonConvert.DeserializeObject<VoteTransaction>(temp2);
+
+                                            //ints1.All(ints2.Contains) && ints1.Count == ints2.Count;
+                                            if (tempTransaction1.transaction.votes.added.All(tempTransaction2.transaction.votes.added.Contains) && tempTransaction1.transaction.votes.added.Count == tempTransaction2.transaction.votes.added.Count && tempTransaction1.transaction.votes.added.Count > 0)
+                                            {
+                                                Console.WriteLine("Same vote match found - " + addresses[votingTrans[i].senderId] + " & " + addresses[votingTrans[j].senderId]);
+                                                File.AppendAllText("SameVotes.txt", addresses[votingTrans[i].senderId] + ": " + votingTrans[i].id + " & " + addresses[votingTrans[j].senderId] + ": " + votingTrans[j].id + Environment.NewLine);
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Different vote match found - " + addresses[votingTrans[i].senderId] + " & " + addresses[votingTrans[j].senderId]);
+                                                File.AppendAllText("DifferentVotes.txt", addresses[votingTrans[i].senderId] + ": " + votingTrans[i].id + " & " + addresses[votingTrans[j].senderId] + ": " + votingTrans[j].id + Environment.NewLine);
+                                            }
                                         }
-                                        else
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (typeTrans == 2 || typeTrans == 3)
+            {
+                Console.WriteLine("Going through voting transactions");
+
+                for (int i = 0; i < regTrans.Count; i++)
+                {
+                    for (int j = 0; j < regTrans.Count; j++)
+                    {
+                        if (i < j)
+                        {
+                            if (regTrans[i].timestamp - regTrans[j].timestamp <= range && regTrans[i].timestamp - regTrans[j].timestamp > 0)
+                            {
+                                if (regTrans[i].senderId != regTrans[j].senderId)
+                                {
+                                    if (addresses[regTrans[i].senderId] != addresses[regTrans[j].senderId])
+                                    {
+                                        if(regTrans[i].amount == regTrans[j].amount)
                                         {
-                                            Console.WriteLine("Different vote match found - " + addresses[votingTrans[i].senderId] + " & " + addresses[votingTrans[j].senderId]);
-                                            File.AppendAllText("DifferentVotes.txt", addresses[votingTrans[i].senderId] + ": " + votingTrans[i].id + " & " + addresses[votingTrans[j].senderId] + ": " + votingTrans[j].id + Environment.NewLine);
+                                            Console.WriteLine("Same funds match found - " + addresses[regTrans[i].senderId] + " & " + addresses[regTrans[j].senderId]);
+                                            File.AppendAllText("SameFunds.txt", addresses[regTrans[i].senderId] + ": " + regTrans[i].id + " & " + addresses[regTrans[j].senderId] + ": " + regTrans[j].id + Environment.NewLine);
                                         }
                                     }
                                 }

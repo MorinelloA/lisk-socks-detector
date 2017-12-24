@@ -21,7 +21,7 @@ namespace LiskSocks
         public string senderId { get; set; }
         public string recipientId { get; set; }
         public string recipientPublicKey { get; set; }
-        public object amount { get; set; }
+        public long amount { get; set; }
         public long fee { get; set; }
         public string signature { get; set; }
         public List<object> signatures { get; set; }

@@ -14,3 +14,11 @@ C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin
 C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin\Debug\Newtonsoft.Json.dll
 C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin\Debug\Newtonsoft.Json.xml
 C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\obj\Debug\LiskSocks.csprojResolveAssemblyReference.cache
+C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\LiskSocks.exe.config
+C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.exe
+C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.pdb
+C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\LiskSocks.exe
+C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\LiskSocks.pdb
+C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\Newtonsoft.Json.dll
+C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\Newtonsoft.Json.xml
+C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.csprojResolveAssemblyReference.cache
