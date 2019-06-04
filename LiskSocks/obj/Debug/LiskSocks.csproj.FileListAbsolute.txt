@@ -22,3 +22,13 @@ C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\LiskSocks.pdb
 C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\Newtonsoft.Json.dll
 C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\Newtonsoft.Json.xml
 C:\Users\laptop\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.csprojResolveAssemblyReference.cache
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\LiskSocks.exe.config
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\LiskSocks.exe
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\LiskSocks.pdb
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\Newtonsoft.Json.dll
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Debug\Newtonsoft.Json.xml
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.csprojAssemblyReference.cache
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.csproj.CoreCompileInputs.cache
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.csproj.CopyComplete
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.exe
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Debug\LiskSocks.pdb

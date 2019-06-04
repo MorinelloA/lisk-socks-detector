@@ -49,8 +49,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Trans.cs" />
-    <Compile Include="Transaction.cs" />
+    <Compile Include="Transactions.cs" />
     <Compile Include="VoteTransaction.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,3 +5,13 @@ C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin
 C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\bin\Release\Newtonsoft.Json.xml
 C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\obj\Release\LiskSocks.exe
 C:\Users\laptop\Downloads\LiskSocks-20171223T002053Z-001\LiskSocks\LiskSocks\obj\Release\LiskSocks.pdb
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Release\LiskSocks.exe.config
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Release\LiskSocks.exe
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Release\LiskSocks.pdb
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Release\Newtonsoft.Json.dll
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\bin\Release\Newtonsoft.Json.xml
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Release\LiskSocks.csprojAssemblyReference.cache
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Release\LiskSocks.csproj.CoreCompileInputs.cache
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Release\LiskSocks.csproj.CopyComplete
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Release\LiskSocks.exe
+C:\Users\tmorinello\Documents\GitHub\LiskSocks\LiskSocks\obj\Release\LiskSocks.pdb

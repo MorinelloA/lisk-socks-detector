@@ -56,8 +56,7 @@ namespace LiskSocks
 
             int offset = 0;
 
-            //string publicNode = "https://wallet.lisknode.io/";
-            string publicNode = "https://wallet.mylisk.com/";
+            string publicNode = "https://api.lisknode.io/";
 
             Dictionary<string, string> addresses = new Dictionary<string, string>();
 
@@ -82,19 +81,19 @@ namespace LiskSocks
                 bool isDone = false;
                 do
                 {
-                    string query = "api/transactions?&senderId=" + address.Key + "&limit=1000&offset=" + offset + "&orderBy=timestamp:desc";
+                    string query = "api/transactions?&senderId=" + address.Key + "&limit=100&offset=" + offset + "&sort=timestamp:desc";
                     
                     //Without sorting, duplicate transactions are gathered
-                    //string query = "api/transactions?&senderId=" + address.Key + "&limit=1000&offset=" + offset;
+                    //string query = "api/transactions?&senderId=" + address.Key + "&limit=100&offset=" + offset;
 
                     using (WebClient wc = new WebClient())
                     {
                         string temp = wc.DownloadString(publicNode + query);
                         transactions.Add(temp);
-                        Trans tempTransaction = JsonConvert.DeserializeObject<Trans>(temp);
-                        if (tempTransaction.transactions.Count >= 1000)
+                        Transactions tempTransaction = JsonConvert.DeserializeObject<Transactions>(temp);
+                        if (tempTransaction.meta.count >= 100 + offset)
                         {
-                            offset += 1000;
+                            offset += 100;
                         }
                         else
                         {
@@ -112,8 +111,8 @@ namespace LiskSocks
             foreach (string str in transactions)
             {
 
-                Trans result = JsonConvert.DeserializeObject<Trans>(str);
-                foreach(Transaction tran in result.transactions)
+                Transactions result = JsonConvert.DeserializeObject<Transactions>(str);
+                foreach(Transaction tran in result.data)
                 {
                     if(tran.type == 3)
                     {
@@ -148,8 +147,8 @@ namespace LiskSocks
                                     if (addresses[votingTrans[i].senderId] != addresses[votingTrans[j].senderId])
                                     {
                                         //api / transactions / get ? id = 2715735863990084187
-                                        string query1 = "api/transactions/get?id=" + votingTrans[i].id;
-                                        string query2 = "api/transactions/get?id=" + votingTrans[j].id;
+                                        string query1 = "api/transactions?id=" + votingTrans[i].id;
+                                        string query2 = "api/transactions?id=" + votingTrans[j].id;
 
                                         //Without sorting, duplicate transactions are gathered
                                         //string query = "api/transactions?&senderId=" + address.Key + "&limit=1000&offset=" + offset;
@@ -159,11 +158,11 @@ namespace LiskSocks
                                             string temp1 = wc.DownloadString(publicNode + query1);
                                             string temp2 = wc.DownloadString(publicNode + query2);
 
-                                            VoteTransaction tempTransaction1 = JsonConvert.DeserializeObject<VoteTransaction>(temp1);
-                                            VoteTransaction tempTransaction2 = JsonConvert.DeserializeObject<VoteTransaction>(temp2);
+                                            Transactions tempTransaction1 = JsonConvert.DeserializeObject<Transactions>(temp1);
+                                            Transactions tempTransaction2 = JsonConvert.DeserializeObject<Transactions>(temp2);
 
                                             //ints1.All(ints2.Contains) && ints1.Count == ints2.Count;
-                                            if (tempTransaction1.transaction.votes.added.All(tempTransaction2.transaction.votes.added.Contains) && tempTransaction1.transaction.votes.added.Count == tempTransaction2.transaction.votes.added.Count && tempTransaction1.transaction.votes.added.Count > 0)
+                                            if (tempTransaction1.data[0].asset.votes.All(tempTransaction2.data[0].asset.votes.Contains) && tempTransaction1.data[0].asset.votes.Count == tempTransaction2.data[0].asset.votes.Count && tempTransaction1.data[0].asset.votes.Count > 0)
                                             {
                                                 Console.WriteLine("Same vote match found - " + addresses[votingTrans[i].senderId] + " & " + addresses[votingTrans[j].senderId]);
                                                 File.AppendAllText("SameVotes.txt", addresses[votingTrans[i].senderId] + ": " + votingTrans[i].id + " & " + addresses[votingTrans[j].senderId] + ": " + votingTrans[j].id + Environment.NewLine);
